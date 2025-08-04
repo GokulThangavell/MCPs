@@ -29,4 +29,7 @@ def delete_doc(doc_id:int):
 @app.get("/list-document")
 def list_documents(limit: int=100):
     result = qdrant_agent.list_documents(limit)
-    return {"count":len(result[0]), "documents":result[0]}
+    if result:
+        return {"count":len(result[0]), "documents":result[0]}
+    else:
+        return {"Document is empty"}
